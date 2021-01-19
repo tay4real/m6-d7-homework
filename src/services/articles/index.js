@@ -2,11 +2,11 @@ const router = require("express").Router();
 
 const Model = require("../../utils/model");
 
-const Modules = new Model("modules");
+const Articles = new Model("articles");
 
 router.get("/", async (req, res, next) => {
   try {
-    const response = await Modules.findOne();
+    const response = await Articles.findOne();
     res.send(JSON.parse(JSON.stringify(response.rows)));
   } catch (e) {
     console.log(e);
@@ -16,7 +16,7 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
   try {
-    const { rows } = await Modules.findById(req.params.id);
+    const { rows } = await Articles.findById(req.params.id);
     res.send(rows);
   } catch (e) {
     console.log(e);
@@ -26,7 +26,7 @@ router.get("/:id", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const response = await Modules.save(req.body);
+    const response = await Articles.save(req.body);
     res.send(response);
   } catch (e) {
     console.log(e);
@@ -36,7 +36,7 @@ router.post("/", async (req, res, next) => {
 
 router.put("/:id", async (req, res, next) => {
   try {
-    const response = await Modules.findByIdAndUpdate(req.params.id, req.body);
+    const response = await Articles.findByIdAndUpdate(req.params.id, req.body);
     res.send(response);
   } catch (e) {
     res.status(500).send(e);
@@ -45,7 +45,7 @@ router.put("/:id", async (req, res, next) => {
 
 router.delete("/:id", async (req, res, next) => {
   try {
-    const { rows } = await Modules.findByIdAndDelete(req.params.id);
+    const { rows } = await Articles.findByIdAndDelete(req.params.id);
     res.send(rows);
   } catch (e) {
     console.log(e);
